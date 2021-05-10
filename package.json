@@ -1,0 +1,52 @@
+{
+  "name": "phonizy-admin",
+  "version": "1.0.0",
+  "description": "back end (NODE JS REST API )poject for phonizy web application ",
+  "main": "src/server.js",
+  "keywords": [
+    "Express",
+    "RestAPI",
+    "MongoDB",
+    "Mongoose",
+    "Phonizy"
+  ],
+  "scripts": {
+    "test:dev": "mocha --recursive --exit",
+    "test:prod": "mocha --recursive --exit",
+    "test": "npm run test:dev",
+    "start:dev": "set NODE_ENV=dev.config&& nodemon src/server.js",
+    "start:prod": "export NODE_ENV=prod.config&& node src/server.js",
+    "start:local": "set NODE_ENV=local.config&& nodemon src/server.js",
+    "start": "npm run start:prod"
+  },
+  "author": "med mahdi maarouf",
+  "license": "God license",
+  "dependencies": {
+    "@google-cloud/storage": "^5.7.0",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.23.0",
+    "config": "^3.3.3",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "express-validator": "^6.6.0",
+    "firebase": "^8.1.2",
+    "firebase-admin": "^9.4.2",
+    "mailer": "^0.6.7",
+    "mongoose": "^5.9.24",
+    "mongoose-paginate-v2": "^1.3.9",
+    "nodemailer": "^6.4.10",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1"
+  },
+  "engines": {
+    "node": "12.13.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

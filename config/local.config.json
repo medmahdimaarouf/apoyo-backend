@@ -1,0 +1,12 @@
+{
+    "app": {
+        "port": 3000,
+        "domaine": "localhost",
+        "protocol": "http",
+        "url": "http://localhost:3000",
+        "clientPath": "../client/local"
+    },
+    "passport": {
+        "secret_key": "lpsk"
+    }
+}

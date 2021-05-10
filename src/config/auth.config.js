@@ -1,0 +1,5 @@
+module.exports = {
+    AUTH_FORGOTPASSWRD_BASEURL: "http://127.0.0.1:3000/forgot/",
+    AUTH_RESETPASSWORD_BASEURL: "http://127.0.0.1:3000/reset/",
+    AUTH_CONFIRMATIONPASSWORD_BASEURL: "http://127.0.0.1:3000/"
+}

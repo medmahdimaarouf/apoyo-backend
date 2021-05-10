@@ -1,0 +1,28 @@
+{
+    "app": {
+        "port": 3000,
+        "domaine": "localhost",
+        "protocol": "http",
+        "url": "http://localhost:3000",
+        "clientPath": "../client/dev/"
+    },
+    "mongo": {
+        "host": "localhost",
+        "port": "27017",
+        "name": "local-unknownapp",
+        "uri": "mongodb://localhost:27017/local-unknownapp",
+        "options": {
+            "useNewUrlParser": true,
+            "useUnifiedTopology": true
+        },
+        "SENDGRID_API_KEY": "dmsk"
+    },
+    "cloudinary": {
+        "cloud_name": "medmahdimaarouf",
+        "api_key": "826139324689614",
+        "api_secret": "ZA1sNVlF3cV873n0ut4agbRAEuM"
+    },
+    "passport": {
+        "secret_key": "dpsk"
+    }
+}
