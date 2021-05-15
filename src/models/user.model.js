@@ -38,11 +38,6 @@ UserSchema.methods.generateJWT = function () {
   }, Config.get('passport').secret_key, { expiresIn: '1d' });
 }
 
-UserSchema.methods.addConnection = function (config) {
-  if (!this.configs) this.configs = config
-  if (!this.configs.connections) this.configs.connections = [];
-  this.configs.connections.push(config.connections)
-}
 /*
 UserSchema.methods.verifyPassword = (password)=>{
   return this.password == crypto.MD5(password);
