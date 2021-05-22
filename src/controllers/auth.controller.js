@@ -55,7 +55,7 @@ exports.login = async (req, res, next) => {
         let errors = validationResult(req);
         if (!errors.isEmpty()) throw { code: 400, message: errors }
 
-        passport.authenticate('local', { usernameField: 'email', passwordField: 'password' },
+        passport.authenticate('login', { usernameField: 'email', passwordField: 'password' },
             async (err, user, info) => {
                 if (err) {
                     return res.status(500).json({ message: "Internal server error!" });
@@ -95,8 +95,15 @@ exports.login = async (req, res, next) => {
     }
 }
 
-exports.forgot = async (req, res, next) => {
-    return res.status(200).json({ message: "FORGOT" });
+exports.verify = async (req, res, next) => {
+    passport.authenticate('confirm', { session: false, option: false }, function (err, user, info) {
+        console.log("here", err, user, info)
+        if (err) { console.log('confirm error') }
+        if (!user) { return res.json({ err: true, msg: "error" }); }
+        if (user.state == "inactive") { return res.json({ err: true, msg: "inactive" }); }
+
+    })
+    return res.status(200).json({ message: "confirm" });
 }
 
 exports.reset = async (req, res, next) => {

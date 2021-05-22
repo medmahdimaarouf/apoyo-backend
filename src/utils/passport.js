@@ -5,27 +5,18 @@ const mongoose = require("mongoose");
 const Config = require('config')
 const User = require("../models/user.model")
 
-var opts = { jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), secretOrKey: Config.get('passport').secret_key }
 
 module.exports = passport => {
-  passport.use(new LocalStrategy({
+  passport.use('login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
   },
     User.authenticate())
   )
 
-  /*,function(username, password, done) {
-    console.log("AUTH DATA  : email->" +  username + "password : " + password);
-    User.findOne({ email: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false,{message:"user is null"}); }
-      if (!user.verifyPassword(password)) { return done(null, false,{message:"passwprd incorrect"}); }
-      return done(null, user);
-    });
-  }));
-*/
-  passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
+  let accessStrategyOptions = { jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), secretOrKey: Config.get('passport').secret_key }
+
+  passport.use('access', new JwtStrategy(accessStrategyOptions, function (jwt_payload, done) {
     //console.log("jwt_payload ",jwt_payload)
     User.findOne({ email: jwt_payload.email }, function (err, user) {
 
@@ -46,8 +37,48 @@ module.exports = passport => {
       }
     });
   }));
+  let confirmStrategyOptions = { jwtFromRequest: ExtractJwt.fromUrlQueryParameter('token'), secretOrKey: Config.get('passport').secret_key }
 
+  passport.use('confirm', new JwtStrategy(confirmStrategyOptions, function (jwt_payload, done) {
+    //console.log("jwt_payload ",jwt_payload)
+    console.log(jwt_payload)
+    User.findOne({ email: jwt_payload.email }, function (err, user) {
+
+      if (err) {
+        console.log("JWT ERROR", err)
+        return done(err, false);
+
+      }
+      if (!user) {
+        console.log("JWT WTF", "Incorrect username.")
+        return done(null, false);
+        // or you could create a new account
+      }
+
+      if (user) {
+        //console.log("JWT USER", user)
+        return done(null, user);
+      }
+    });
+  }));
+  //ExtractJwt.fromUrlQueryParameter('token');
   passport.serializeUser(User.serializeUser());
   passport.deserializeUser(User.deserializeUser());
 };
 
+/*
+
+
+ passport.authenticate('JWT', function(err, user, info) {
+        if (err) { return next(err); }
+        if (!user) { return res.json({ err:true, msg:"error" }); }
+
+        if (user.state == "inactive") { return res.json({ err:true, msg:"inactive" });  }
+
+        req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            return res.json({ err:false, msg:"success" });
+        });
+    })(req, res, next);
+
+    */

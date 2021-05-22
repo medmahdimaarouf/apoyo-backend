@@ -6,8 +6,8 @@ const validators = require("../utils/validators/auth.validators")
 
 router.post("/login", validators.loginValidations, authController.login);
 router.post("/register", validators.registerValidations, authController.register);
-router.post("/forgot", validators.loginValidations, authController.forgot);
+router.get("/verify", validators.loginValidations, authController.verify);
 router.post("/reset", validators.registerValidations, authController.reset);
-router.get("/", passport.authenticate('jwt', { session: false }), authController.getMe);
+router.get("/", passport.authenticate('access', { session: false }), authController.getMe);
 
 module.exports = router;

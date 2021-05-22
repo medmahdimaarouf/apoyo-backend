@@ -30,7 +30,6 @@ UserSchema.plugin(passportLocalMongoose, {
 });
 
 UserSchema.methods.generateJWT = function () {
-
   return Jwt.sign({
     email: this.email,
     id: this._id,
@@ -38,6 +37,9 @@ UserSchema.methods.generateJWT = function () {
   }, Config.get('passport').secret_key, { expiresIn: '1d' });
 }
 
+UserSchema.methods.generateVerificationToken = function () {
+  const a = Jwt.sign({ id: this._id, email: this.email }, Config.get('passport').secret_key, { expiresIn: '7d' })
+}
 /*
 UserSchema.methods.verifyPassword = (password)=>{
   return this.password == crypto.MD5(password);
