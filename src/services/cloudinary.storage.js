@@ -1,6 +1,6 @@
 const cloudinary = require('cloudinary').v2;
-
-cloudinary.config(cloudconfig);
+const Config = require('config');
+cloudinary.config(Config.get('cloudinary'));
 
 /**
  * You can upload any file to your firebase storage in according to your firebase access config in config/firebase-storage.config.js
@@ -17,7 +17,7 @@ module.exports.upload = (file, path = null, name = null) => {
         cloudinary.uploader.upload_stream({
             public_id: name || new Date().getTime(),
             overwrite: false,
-            folder: path || "/"
+            folder: Config.get('cloudinary').assets_directory + '/' + path ? path + '/' : ''
         }, (err, result) => {
             if (err) {
                 if (error) error(err)

@@ -1,24 +1,31 @@
 const Product = require('../models/product.model')
+const CloudinaryStorage = require('../services/cloudinary.storage')
+const Config = require('config');
 
 exports.create = (req, res) => {
-    var product = new Product({
-        label: req.body.label,
-        description: req.body.description,
-        price: req.body.price,
-        discount: req.body.discount,
-        category: req.body.category
-    });
-    Product.create(product, async function (err) {
-        if (err) {
-            console.log('error while create product!', err);
-            return res.status(501).json({ success: false, message: err.message, data: product });
-        }
-        return res.status(200).json({
-            success: true,
-            data: product,
-            message: "Created product "
+    let image = req.files.images;
+    CloudinaryStorage.upload(image, 'products').then(result => {
+        var product = new Product({
+            label: req.body.label,
+            description: req.body.description,
+            price: req.body.price,
+            discount: req.body.discount,
+            images: [result],
+            category: req.body.category
         });
-    });
+        Product.create(product, async function (err) {
+            if (err) {
+                console.log('error while create product!', err);
+                return res.status(501).json({ success: false, message: err.message, data: product });
+            }
+            return res.status(200).json({
+                success: true,
+                data: product,
+                message: "Created product "
+            });
+        });
+    })
+
 }
 exports.update = (req, res) => {
     Product.findByIdAndUpdate(
@@ -33,7 +40,7 @@ exports.update = (req, res) => {
         { new: false } // TAKE CARE HERE .......  { new: false }
     )
         .then((product) => {
-            if (!user) {
+            if (!product) {
                 throw {
                     code: 404,
                     message: "Product not found with id " + req.params.id,

@@ -20,7 +20,8 @@
     "cloudinary": {
         "cloud_name": "medmahdimaarouf",
         "api_key": "826139324689614",
-        "api_secret": "ZA1sNVlF3cV873n0ut4agbRAEuM"
+        "api_secret": "ZA1sNVlF3cV873n0ut4agbRAEuM",
+        "assets_directory": "Apoyo"
     },
     "passport": {
         "secret_key": "dpsk"
