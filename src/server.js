@@ -11,7 +11,8 @@ const cors = require('cors');
 // + APP REQUIRES
 const usersRootes = require("./routes/user.routes");
 const authRootes = require("./routes/auth.routes");
-const productsRootes = require('./routes/product.routes')
+const productsRootes = require('./routes/product.routes');
+const cateogriesRootes = require('./routes/cateogry.routes');
 const { options } = require("./routes/user.routes");
 // - APP REQUIRES
 
@@ -69,6 +70,7 @@ app.get("/api", (req, res) => {
 app.use('/api/auth', authRootes);
 app.use('/api/products', productsRootes);
 app.use('/api/users', passport.authenticate('jwt', { session: false }), usersRootes);
+app.use('/api/categories', passport.authenticate('jwt', { session: false }), cateogriesRootes);
 // - APP MAIN ROUTES
 require("./utils/passport")(passport);
 app.listen(port, () => { console.log("Server is listening on port " + port); });

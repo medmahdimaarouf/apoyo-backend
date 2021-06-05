@@ -1,0 +1,29 @@
+{
+    "app": {
+        "domaine": "heroku",
+        "protocol": "https",
+        "url": "https://ci-apoyo-backend.herokuapp.com",
+        "clientPath": "../client/dev/"
+    },
+    "mongo": {
+        "claster": "cluster0",
+        "host": "_mongodb._tcp.claster0.bnvtz.mongodb.net",
+        "port": "27017",
+        "name": "ci-apoyo",
+        "uri": "mongodb://apoyogroupe@gmail.com:dev2021app@cluster0-shard-00-00.ojlgl.mongodb.net:27017,cluster0-shard-00-01.ojlgl.mongodb.net:27017,cluster0-shard-00-02.ojlgl.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-87a8fo-shard-0&authSource=admin&retryWrites=true&w=majority",
+        "options": {
+            "useNewUrlParser": true,
+            "useUnifiedTopology": true
+        },
+        "SENDGRID_API_KEY": "dmsk"
+    },
+    "cloudinary": {
+        "cloud_name": "medmahdimaarouf",
+        "api_key": "826139324689614",
+        "api_secret": "ZA1sNVlF3cV873n0ut4agbRAEuM",
+        "assets_directory": "Apoyo"
+    },
+    "passport": {
+        "secret_key": "dpsk"
+    }
+}

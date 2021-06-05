@@ -10,7 +10,7 @@
         "host": "localhost",
         "port": "27017",
         "name": "local-unknownapp",
-        "uri": "mongodb://localhost:27017/local-unknownapp",
+        "uri": "mongodb://localhost:27017/local-apoyo",
         "options": {
             "useNewUrlParser": true,
             "useUnifiedTopology": true
