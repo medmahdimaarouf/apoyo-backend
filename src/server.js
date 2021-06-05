@@ -69,8 +69,8 @@ app.get("/api", (req, res) => {
 
 app.use('/api/auth', authRootes);
 app.use('/api/products', productsRootes);
-app.use('/api/users', passport.authenticate('jwt', { session: false }), usersRootes);
-app.use('/api/categories', passport.authenticate('jwt', { session: false }), cateogriesRootes);
+app.use('/api/users', passport.authenticate('access', { session: false }), usersRootes);
+app.use('/api/categories', passport.authenticate('access', { session: false }), cateogriesRootes);
 // - APP MAIN ROUTES
 require("./utils/passport")(passport);
 app.listen(port, () => { console.log("Server is listening on port " + port); });
